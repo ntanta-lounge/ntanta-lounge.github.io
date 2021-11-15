@@ -11,6 +11,7 @@ function getStatus(id) {
   fetch(url)
   .then((response) => response.json())
   .then(json => {
+    document.getElementById('spinner').remove()
     if (json.customers.length !== 0) {
       setStatus(true, json.customers[0].name, 'Valid');
     } else {
@@ -18,6 +19,8 @@ function getStatus(id) {
     }
   })
   .catch(err => {
+    console.log(err)
+    document.getElementById('spinner').remove()
     setStatus(false, '', 'System Error')
   });
 }
