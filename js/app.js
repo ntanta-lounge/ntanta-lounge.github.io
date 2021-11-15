@@ -14,7 +14,7 @@ function getStatus(id) {
     if (json.customer.length !== 0) {
       setStatus(true, json.customer[0].name, 'Valid');
     } else {
-      setStatus(false, json.customer[0].name, 'No Entry');
+      setStatus(false, '', 'No Entry');
     }
   })
   .catch(err => {
