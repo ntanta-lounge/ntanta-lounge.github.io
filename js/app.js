@@ -11,17 +11,19 @@ function getStatus(id) {
   fetch(url)
   .then((response) => response.json())
   .then(json => {
-    document.getElementById('spinner').remove()
-    if (json.customers.length !== 0) {
-      setStatus(true, json.customers[0].name, 'Valid');
+    if (json.customer.length !== 0) {
+      setStatus(true, json.customer[0].name, 'Valid');
     } else {
-      setStatus(false, json.customers[0].name, 'No Entry');
+      setStatus(false, json.customer[0].name, 'No Entry');
     }
   })
   .catch(err => {
     console.log(err)
-    document.getElementById('spinner').remove()
     setStatus(false, '', 'System Error')
+  })
+  .finally(() => {
+    let spinnerEl = document.getElementById('spinner');
+    spinnerEl.remove();
   });
 }
 
