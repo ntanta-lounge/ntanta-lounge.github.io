@@ -6,7 +6,7 @@ function init() {
   document.getElementById('customer-id-hidden').value = id;
   document.getElementById('data-id').style.display = 'flex';
 
-  let url = 'https://api.sheety.co/6d79bab42ccda02d92c2cd4536c74ba8/ntanta/customer?filter[activated]=true&filter[custId]=' + id;
+  let url = 'https://api.sheety.co/6d79bab42ccda02d92c2cd4536c74ba8/ntanta/customer?filter[activated]=true&filter[banned]=false&filter[customerId]=' + id;
   fetch(url)
   .then((response) => response.json())
   .then(json => {
