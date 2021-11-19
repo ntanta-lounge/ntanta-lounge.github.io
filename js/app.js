@@ -1,40 +1,33 @@
 function init() {
   let params = (new URL(document.location)).searchParams;
-  let id = params.get("id").trim();
-  document.getElementById('customer_id').textContent = id;
-  document.getElementById('customer_id_txt').value = id;
-  getStatus(id);
-}
+  let id = params.get('id').trim();
 
-function getStatus(id) {
+  document.getElementById('customer-id').textContent = id;
+  document.getElementById('customer-id-hidden').value = id;
+  document.getElementById('data-id').style.display = 'flex';
+
   let url = 'https://api.sheety.co/6d79bab42ccda02d92c2cd4536c74ba8/ntanta/customer?filter[activated]=true&filter[custId]=' + id;
   fetch(url)
   .then((response) => response.json())
   .then(json => {
     if (json.customer.length !== 0) {
-      setStatus(true, json.customer[0].name, 'Valid');
+      document.getElementById('approved').style.display = 'block';
     } else {
-      setStatus(false, '', 'No Entry');
+      document.getElementById('denied').style.display = 'block';
     }
   })
   .catch(err => {
     console.log(err)
-    setStatus(false, '', 'System Error')
+    document.getElementById('error').style.display = 'block';
   })
   .finally(() => {
-    let spinnerEl = document.getElementById('spinner');
-    spinnerEl.remove();
+    let loader = document.getElementById('loader');
+    loader.remove();
   });
 }
 
-function setStatus(isValid, customerName, validationMsg) {
-  document.getElementById('name').textContent = customerName;
-  document.getElementById('status').textContent = validationMsg;
-  document.getElementById('status').className = isValid ? 'valid' : 'invalid';
-}
-
 function copy() {
-  var copyText = document.getElementById("customer_id_txt");
+  var copyText = document.getElementById('customer-id-hidden');
   copyText.select();
   copyText.setSelectionRange(0, 99999);
   navigator.clipboard.writeText(copyText.value);
