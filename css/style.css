@@ -79,6 +79,10 @@ button {
   margin-left: 12px;
 }
 
+button:active {
+  background-color: #775624;
+}
+
 .lds-ripple {
   display: inline-block;
   position: relative;
